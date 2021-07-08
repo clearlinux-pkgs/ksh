@@ -1,0 +1,26 @@
+diff -purN ksh-1.0.0-beta.1.org/Makefile ksh-1.0.0-beta.1/Makefile
+--- ksh-1.0.0-beta.1.org/Makefile	1970-01-01 00:00:00.000000000 +0000
++++ ksh-1.0.0-beta.1/Makefile	2021-07-08 15:56:16.280635959 +0000
+@@ -0,0 +1,9 @@
++all: build
++
++
++build:
++	bin/package make
++
++install:
++	mkdir -p $(DESTDIR)/usr/bin
++	cp arch/*/bin/ksh $(DESTDIR)/usr/bin/
+\ No newline at end of file
+diff -purN ksh-1.0.0-beta.1.org/Makefile~ ksh-1.0.0-beta.1/Makefile~
+--- ksh-1.0.0-beta.1.org/Makefile~	1970-01-01 00:00:00.000000000 +0000
++++ ksh-1.0.0-beta.1/Makefile~	2021-07-08 15:55:17.000000000 +0000
+@@ -0,0 +1,7 @@
++all: build
++
++
++build:
++	bin/package make
++
++install:
+\ No newline at end of file
