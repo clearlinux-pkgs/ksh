@@ -4,10 +4,10 @@
 # Using build pattern: make
 #
 Name     : ksh
-Version  : 1.0.6
-Release  : 8
-URL      : https://github.com/ksh93/ksh/archive/v1.0.6/ksh-1.0.6.tar.gz
-Source0  : https://github.com/ksh93/ksh/archive/v1.0.6/ksh-1.0.6.tar.gz
+Version  : 1.0.7
+Release  : 9
+URL      : https://github.com/ksh93/ksh/archive/v1.0.7/ksh-1.0.7.tar.gz
+Source0  : https://github.com/ksh93/ksh/archive/v1.0.7/ksh-1.0.7.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause EPL-1.0 EPL-2.0
@@ -44,11 +44,11 @@ license components for the ksh package.
 
 
 %prep
-%setup -q -n ksh-1.0.6
-cd %{_builddir}/ksh-1.0.6
+%setup -q -n ksh-1.0.7
+cd %{_builddir}/ksh-1.0.7
 %patch -P 1 -p1
 pushd ..
-cp -a ksh-1.0.6 buildavx2
+cp -a ksh-1.0.7 buildavx2
 popd
 
 %build
@@ -59,7 +59,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686689594
+export SOURCE_DATE_EPOCH=1694789471
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -80,7 +80,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1686689594
+export SOURCE_DATE_EPOCH=1694789471
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ksh
 cp %{_builddir}/ksh-%{version}/COPYRIGHT %{buildroot}/usr/share/package-licenses/ksh/c0bddab6949019048749f2d75aa59ef94b110e94 || :
