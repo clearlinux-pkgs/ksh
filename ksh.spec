@@ -6,10 +6,10 @@
 # autospec commit: c1050fe
 #
 Name     : ksh
-Version  : 1.0.7
-Release  : 10
-URL      : https://github.com/ksh93/ksh/archive/v1.0.7/ksh-1.0.7.tar.gz
-Source0  : https://github.com/ksh93/ksh/archive/v1.0.7/ksh-1.0.7.tar.gz
+Version  : 1.0.8
+Release  : 11
+URL      : https://github.com/ksh93/ksh/archive/v1.0.8/ksh-1.0.8.tar.gz
+Source0  : https://github.com/ksh93/ksh/archive/v1.0.8/ksh-1.0.8.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause EPL-1.0 EPL-2.0
@@ -21,12 +21,13 @@ Requires: ksh-license = %{version}-%{release}
 Patch1: addmake.patch
 
 %description
-The advanced software technology department has been collecting useful C
-routines in a single library called libast.  libast is used by nmake, the
-nmake cpp (which is mainly based on another library (libpp)), CIA
-(C information abstractor from Robin Chen), and a collection of other
-/bin and /usr/bin commands that benefit from concentrating functionality
-in libast.
+\This directory, and its subdirectories contain the source code
+for ksh-93; the language described in the second edition of
+the book, "The KornShell Command and Programming Language," by
+Morris Bolsky and David Korn which is published by Prentice Hall.
+ksh-93 has been compiled and run on several machines with several
+operating systems.  The end of this file contains a partial list of
+operating systems and machines that ksh-93 has been known to run on.
 
 %package bin
 Summary: bin components for the ksh package.
@@ -46,11 +47,11 @@ license components for the ksh package.
 
 
 %prep
-%setup -q -n ksh-1.0.7
-cd %{_builddir}/ksh-1.0.7
+%setup -q -n ksh-1.0.8
+cd %{_builddir}/ksh-1.0.8
 %patch -P 1 -p1
 pushd ..
-cp -a ksh-1.0.7 buildavx2
+cp -a ksh-1.0.8 buildavx2
 popd
 
 %build
@@ -61,7 +62,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1702004603
+export SOURCE_DATE_EPOCH=1704138921
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -99,10 +100,9 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1702004603
+export SOURCE_DATE_EPOCH=1704138921
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/ksh
-cp %{_builddir}/ksh-%{version}/COPYRIGHT %{buildroot}/usr/share/package-licenses/ksh/c0bddab6949019048749f2d75aa59ef94b110e94 || :
 cp %{_builddir}/ksh-%{version}/LICENSE.md %{buildroot}/usr/share/package-licenses/ksh/85a9ba7a011c6a142fdf61cca24da1b7bbff75c8 || :
 pushd ../buildavx2/
 %make_install_v3
@@ -121,4 +121,3 @@ popd
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/ksh/85a9ba7a011c6a142fdf61cca24da1b7bbff75c8
-/usr/share/package-licenses/ksh/c0bddab6949019048749f2d75aa59ef94b110e94
