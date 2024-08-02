@@ -2,6 +2,74 @@ This documents significant changes in the 1.0 branch of ksh 93u+m.
 For full details, see the git log at: https://github.com/ksh93/ksh/tree/1.0
 Uppercase BUG_* IDs are shell bug IDs as used by the Modernish shell library.
 
+2024-08-01:
+
+- Release 1.0.10 -- exactly two years after 1.0.0 and twelve years after 93u+.
+
+2024-07-31:
+
+- Fixed a bug where printf %T, after having printed the time in UTC once
+  with the TZ variable set to "UTC", would always print the time in UTC from
+  then on, even if the TZ variable was changed to another time zone.
+  Bug introduced in ksh 93t+ 2009-10-21.
+
+2024-07-26:
+
+- Fixed a regression where a broken pipe signal (SIGPIPE), when occurring in
+  a pipe construct within a subshell, caused incorrect signal handling in the
+  parent/main shell, in some cases causing a script to abort. Bug introduced
+  on 2022-07-02.
+
+- Fixed a bug in the pipefail shell option where the status of a signalled
+  non-rightmost process in a pipeline was just the signal number, instead of
+  that number + 256. Bug introduced in ksh 93u+ 2011-04-15.
+
+2024-07-24:
+
+- Fixed a serious bug in the arithmetic subsystem that was triggered on
+  non-Intel processors (such as ARM): any division of an integer by a
+  negative integer threw a spurious "divide by zero" error. Bug introduced
+  in ksh 93q 2005-01-31.
+
+- Similarly fixed: the return value of the assignment of a negative value to
+  an unsigned integer in an arithmetic expression was always 0 on ARM
+  processors (instead of being equal to the assigned wrapped-around value).
+  Bug introduced by the discipline fix on 2024-01-21.
+
+2024-07-21:
+
+- Fixed a long-standing parsing bug: a '((' that was unmatched by
+  corresponding closing parentheses and enclosed within a compound command
+  failed to throw a syntax error and could cause the shell to crash.
+
+2024-07-18:
+
+- Fixed a regression where 'read' cannot create a previously nonexistent
+  variable when used within a namespace block. Bug introduced on 2023-06-02.
+
+2024-07-17:
+
+- Fixed: if the --posix or --letoctal option was turned on, octal numbers
+  designated by the leading-zero octal prefix enabled by these options but
+  containing the invalid digits 8 or 9 (e.g., $((09)) or let "09") failed
+  to throw an error and were instead incorrectly reinterpreted as decimal.
+
+- Fixed: invalid leading zeros in the '0x' hexadecimal prefix or in ksh
+  arithmetic base specifiers, e.g., 00x2F or 016#2F (instead of 0x2F or 16#2F),
+  failed to throw an arithmetic syntax error.
+
+2024-07-16:
+
+- The history expansion character ('!' by default) is now not processed when
+  immediately following '${'. This makes it psosible to use expansion syntax
+  like ${!varname} and ${!prefix@} on the interactive command line with the
+  histexpand option on; these no longer trigger an "event not found" error.
+
+2024-07-13:
+
+- The shell is now capable of handling more than 32767 simultaneous
+  background jobs, subject to system limitations.
+
 2024-07-02:
 
 - Release 1.0.9.
